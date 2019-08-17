@@ -6,10 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/1.
  */
 public class DateUtil extends DateUtils {
-    public static final String DEFAULT_DATE_FORMATE = "yyyy-MM-dd HH:mm:ss";
+    public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String DATE_FORMAT = "yyyy-MM-dd";
     public static final  int TIME_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
     public static final  int TIME_DAY_MILLIHOUR = 60 * 60 * 1000;
@@ -69,7 +70,7 @@ public class DateUtil extends DateUtils {
      * @see #getFormatDateTime(Date, String)
      */
     public static String getFormatDateTime(Date currDate) {
-        return getFormatDateTime(currDate, DEFAULT_DATE_FORMATE);
+        return getFormatDateTime(currDate, DEFAULT_DATE_FORMAT);
     }
     /**
      * 根据格式得到格式化后的时间
@@ -89,7 +90,7 @@ public class DateUtil extends DateUtils {
             dtFormatdB = new SimpleDateFormat(format);
             return dtFormatdB.format(currDate);
         } catch (Exception e) {
-            dtFormatdB = new SimpleDateFormat(DEFAULT_DATE_FORMATE);
+            dtFormatdB = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
             try {
                 return dtFormatdB.format(currDate);
             } catch (Exception ex) {

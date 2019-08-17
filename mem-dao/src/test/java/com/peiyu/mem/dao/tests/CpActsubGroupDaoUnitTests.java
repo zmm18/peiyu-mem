@@ -1,7 +1,6 @@
 package com.peiyu.mem.dao.tests;
 
-import com.peiyu.mem.dao.CpActsubGroupDao;
-import com.peiyu.mem.domian.entity.CpActivity;
+import com.peiyu.mem.dao.CpActSubGroupDao;
 import com.peiyu.mem.domian.entity.CpActsubGroup;
 import com.peiyu.mem.utils.DateUtil;
 import org.junit.Test;
@@ -13,7 +12,7 @@ import org.unitils.reflectionassert.ReflectionAssert;
  */
 public class CpActsubGroupDaoUnitTests extends BaseDaoUnitTests {
     @Autowired
-    private CpActsubGroupDao cpActsubGroupDao;
+    private CpActSubGroupDao cpActsubGroupDao;
     @Test
     public void insert_validcpActsubGroup_Reture1(){
         CpActsubGroup cpActsubGroup=new CpActsubGroup();

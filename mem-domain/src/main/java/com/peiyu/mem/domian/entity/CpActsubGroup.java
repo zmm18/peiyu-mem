@@ -5,18 +5,43 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/11/23.
  * 优惠券组
  */
 public class CpActsubGroup implements Serializable {
-    private String  businessName;//商家名称
-    private String organOrStoreCode;//机构或者门店编号
-    private String organOrStoreName;//机构或者门店名称
-    private String detailCode;//限制详情编码
-    private String detailName;//限制详情名称
+    /**
+     * 商家名称
+     */
+    private String  businessName;
+    /**
+     * 机构或者门店编号
+     */
+    private String organOrStoreCode;
+    /**
+     * 机构或者门店名称
+     */
+    private String organOrStoreName;
+    /**
+     * 限制详情编码
+     */
+    private String detailCode;
 
-    private List<String> organOrStoreList;//限制机构或者门店
-    private List<String>detailList;//限制详情
+    /**
+     * 限制详情名称
+     */
+    private String detailName;
+
+    /**
+     * 限制机构或者门店
+     */
+
+    private List<String> organOrStoreList;
+    /**
+     * 限制详情
+     */
+    private List<String>detailList;
+
     public String getDetailName() {
         return detailName;
     }

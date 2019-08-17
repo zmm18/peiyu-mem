@@ -1,12 +1,12 @@
 package com.peiyu.mem.rabbitmq.consumers;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.migr.common.util.JsonUtil;
-import com.migr.common.util.StringUtils;
 import com.peiyu.mem.dao.CouponDao;
 import com.peiyu.mem.domian.entity.Coupon;
 import com.peiyu.mem.rabbitmq.Gson2JsonMessageConverter;
 import com.rabbitmq.client.Channel;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
@@ -23,6 +23,8 @@ public class MakeCouponsHandler2 implements ChannelAwareMessageListener {
     private CouponDao couponDao;
     private Gson2JsonMessageConverter jsonMessageConverter;
 
+    private static Gson gson = new Gson();
+
     @Override
     public void onMessage(Message message, Channel channel) throws Exception {
         try {
@@ -32,7 +34,9 @@ public class MakeCouponsHandler2 implements ChannelAwareMessageListener {
             }
             String data = jsonMessageConverter.fromMessage(message).toString();
             if (StringUtils.isNotBlank(data)) {
-                List<Coupon> coupons = JsonUtil.g.fromJson(data, new TypeToken<List<Coupon>>() {
+                Gson gson = new Gson();
+
+                List<Coupon> coupons = gson.fromJson(data, new TypeToken<List<Coupon>>() {
                 }.getType());
                 couponDao.insertBatchCoupons(coupons);
                 channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);

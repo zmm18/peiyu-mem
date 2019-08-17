@@ -1,6 +1,4 @@
 package com.peiyu.mem.manager.impl;
-
-import com.migr.common.util.JsonUtil;
 import com.peiyu.mem.dao.CouponDao;
 import com.peiyu.mem.domian.entity.Coupon;
 import com.peiyu.mem.manager.CouponManager;
@@ -17,6 +15,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.util.List;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/7.
  */
 @Service

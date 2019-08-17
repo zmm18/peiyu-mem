@@ -1,10 +1,10 @@
 package com.peiyu.mem.manager.impl;
 
-import com.migr.common.util.JsonUtil;
+import com.google.gson.Gson;
 import com.peiyu.mem.dao.BizCodeDao;
 import com.peiyu.mem.domian.entity.BizCode;
 import com.peiyu.mem.manager.BizCodeManager;
-import com.peiyu.mem.redis.JedisTemplate;
+import com.peiyu.mem.redis.RedisTemplate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +14,7 @@ import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/5.
  */
 @Service
@@ -22,9 +23,11 @@ public class BizCodeManagerImpl implements BizCodeManager {
     @Autowired
     private PlatformTransactionManager transactionManager;
     @Autowired
-    private JedisTemplate jedisTemplate;
+    private RedisTemplate redisTemplate;
     @Autowired
     private BizCodeDao bizCodeDao;
+
+    private static Gson gson = new Gson();
 
     @Override
     public BizCode getCodeByNo(final Long vendorId, final String bno) {
@@ -35,12 +38,12 @@ public class BizCodeManagerImpl implements BizCodeManager {
                 try {
                     BizCode code;
                     String cacheKey = String.format("%s_%s", vendorId, bno);
-                    code = JsonUtil.g.fromJson(jedisTemplate.get(cacheKey), BizCode.class);
+                    code = gson.fromJson(redisTemplate.get(cacheKey), BizCode.class);
                     if (code != null) {
                         return code;
                     }
                     if (code == null && !vendorId.equals(0)) {
-                        code=bizCodeDao.getBizcodeByBno(vendorId,bno);
+                        code=bizCodeDao.getBizCodeByBno(vendorId,bno);
                     }
                     return code;
                 } catch (Exception e) {
@@ -60,7 +63,7 @@ public class BizCodeManagerImpl implements BizCodeManager {
         }
         String cacheKey = String.format("%s_%s", code.getVendorId(), code.getBno());
         try {
-            jedisTemplate.set(cacheKey, JsonUtil.objectToJson(code));
+            redisTemplate.set(cacheKey,gson.toJson(code));
         } catch (Exception e) {
             log.error(e.getMessage());
             return false;

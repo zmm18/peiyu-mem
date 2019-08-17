@@ -36,8 +36,8 @@ public class MakingTaskServiceUnitTests {
         makingTask.setGenNoRuleSuffix("b");
         makingTask.setTicNum(100000);
         makingTaskManager.insertCacheByTaskCode(makingTask);
-        makingTaskManager.deleteCacheByMakingConpon(makingTask.getVendorId(),makingTask.getTaskCode());
-        makingTaskManager.deteleCacheByTaskCode(makingTask);
+        makingTaskManager.deleteCacheByMainKingCoupon(makingTask.getVendorId(),makingTask.getTaskCode());
+        makingTaskManager.deleteCacheByTaskCode(makingTask);
         makingTaskService.insertMakingTask(makingTask);
     }
     @Test

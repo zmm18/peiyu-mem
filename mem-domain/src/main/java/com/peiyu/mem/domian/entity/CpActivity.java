@@ -4,14 +4,27 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/11/23.
  * 优惠券活动
  */
 public class CpActivity implements Serializable {
-    private String organOrStoreCode;//机构或者门店编号
-    private String organOrStoreName;//机构或者门店名称
-    private String detailCode;//限制详情编码
-    private String detailName;//限制详情名称
+    /**
+     * 机构或者门店编号
+     */
+    private String organOrStoreCode;
+    /**
+     * 机构或者门店名称
+     */
+    private String organOrStoreName;
+    /**
+     * 限制详情编码
+     */
+    private String detailCode;
+    /**
+     * 限制详情名称
+     */
+    private String detailName;
 
     public String getDetailName() {
         return detailName;

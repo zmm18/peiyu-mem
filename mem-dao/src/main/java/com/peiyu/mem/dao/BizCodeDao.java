@@ -4,6 +4,7 @@ import com.peiyu.mem.domian.entity.BizCode;
 import org.apache.ibatis.annotations.Param;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/5.
  * 系统单据号接口
  */
@@ -14,6 +15,6 @@ public interface BizCodeDao extends BaseDao<BizCode>{
      * @param bizNo
      * @return
      */
-    BizCode getBizcodeByBno(@Param("vendorId") Long vendorId, @Param("bizNo") String bizNo);
+    BizCode getBizCodeByBno(@Param("vendorId") Long vendorId, @Param("bizNo") String bizNo);
 
 }

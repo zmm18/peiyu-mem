@@ -1,15 +1,15 @@
 package com.peiyu.mem.service.impl;
 
-import com.migr.common.util.StringUtils;
-import com.migr.common.util.bean.BeanUtils;
 import com.peiyu.mem.commen.SysConstants;
-import com.peiyu.mem.dao.CpActsubGroupDao;
+import com.peiyu.mem.dao.CpActSubGroupDao;
 import com.peiyu.mem.domian.entity.CpActsubGroup;
 import com.peiyu.mem.domian.entity.CpApplyLimitdt;
 import com.peiyu.mem.domian.entity.CpUseLimitdt;
 import com.peiyu.mem.manager.CpActsubGroupManager;
 import com.peiyu.mem.service.CpActsubGroupService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,67 +17,68 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/3.
  */
 @Service
 public class CpActsubGroupServiceImpl implements CpActsubGroupService {
     private Logger log=Logger.getLogger(CpActivityServiceImpl.class);
     @Autowired
-    private CpActsubGroupDao actsubGroupDao;
+    private CpActSubGroupDao actSubGroupDao;
     @Autowired
     private CpActsubGroupManager actsubGroupManager;
     @Override
-    public int insertActsubGroup(CpActsubGroup actsubGroup) {
+    public int insertActSubGroup(CpActsubGroup actSubGroup) {
         List<CpApplyLimitdt> applyLimitdtList = new ArrayList<>();
         List<CpUseLimitdt> useLimitdtList = new ArrayList<>();
-        if (!actsubGroup.getApplyScopeType().equals(SysConstants.COUPONAPPLIEDRANGE.UNLIMITED)) {
-            if (StringUtils.isEmpty(actsubGroup.getDetailCode())) {
+        if (!actSubGroup.getApplyScopeType().equals(SysConstants.COUPONAPPLIEDRANGE.UNLIMITED)) {
+            if (StringUtils.isEmpty(actSubGroup.getDetailCode())) {
                 log.error("没有选择应用范围");
                 return 0;
             }
         }
-        if (!actsubGroup.getUseScopeType().equals(SysConstants.COUPONUSERANGE.UNLIMITED)) {
-            if (StringUtils.isEmpty(actsubGroup.getOrganOrStoreCode())) {
+        if (!actSubGroup.getUseScopeType().equals(SysConstants.COUPONUSERANGE.UNLIMITED)) {
+            if (StringUtils.isEmpty(actSubGroup.getOrganOrStoreCode())) {
                 log.error("没有选择使用范围");
                 return 0;
             }
         }
-        String[] splitCodes = actsubGroup.getDetailCode().split(",");
-        String[] splitNames = actsubGroup.getDetailName().split(",");
+        String[] splitCodes = actSubGroup.getDetailCode().split(",");
+        String[] splitNames = actSubGroup.getDetailName().split(",");
         for (int i = 0; i < splitCodes.length; i++) {
             CpApplyLimitdt applyLimit = new CpApplyLimitdt();
-            BeanUtils.copyProperties(applyLimit, actsubGroup);
+            BeanUtils.copyProperties(applyLimit, actSubGroup);
             applyLimit.setId(null);
             applyLimit.setOwnRecordType(SysConstants.OWNRECORDTYPE.GROUPS);
-            applyLimit.setOwnRecordCode(actsubGroup.getSubgroupCode());
+            applyLimit.setOwnRecordCode(actSubGroup.getSubgroupCode());
             applyLimit.setDetailCode(splitCodes[i]);
             applyLimit.setDetailName(splitNames[i]);
             applyLimitdtList.add(applyLimit);
         }
-        String[] codes = actsubGroup.getOrganOrStoreCode().split(",");
-        String[] names = actsubGroup.getOrganOrStoreName().split(",");
+        String[] codes = actSubGroup.getOrganOrStoreCode().split(",");
+        String[] names = actSubGroup.getOrganOrStoreName().split(",");
         for (int i = 0; i < codes.length; i++) {
             CpUseLimitdt useLimit = new CpUseLimitdt();
-            BeanUtils.copyProperties(useLimit, actsubGroup);
+            BeanUtils.copyProperties(useLimit, actSubGroup);
             useLimit.setId(null);
-            useLimit.setOwnRecordCode(actsubGroup.getSubgroupCode());
+            useLimit.setOwnRecordCode(actSubGroup.getSubgroupCode());
             useLimit.setOwnRecordType(SysConstants.OWNRECORDTYPE.GROUPS);
-            if (actsubGroup.getUseScopeType().equals(SysConstants.COUPONUSERANGE.ORAGN)) {
+            if (actSubGroup.getUseScopeType().equals(SysConstants.COUPONUSERANGE.ORAGN)) {
                 useLimit.setOrganCode(codes[i]);
                 useLimit.setOrganName(names[i]);
             }
-            if (actsubGroup.equals(SysConstants.COUPONUSERANGE.STORE)) {
+            if (actSubGroup.equals(SysConstants.COUPONUSERANGE.STORE)) {
                 useLimit.setStoreCode(codes[i]);
                 useLimit.setStoreName(names[i]);
             }
             useLimitdtList.add(useLimit);
         }
-        if (actsubGroup.getId() == null) {
-            if (actsubGroupManager.insertCpActsubGroup(actsubGroup, applyLimitdtList, useLimitdtList)) {
+        if (actSubGroup.getId() == null) {
+            if (actsubGroupManager.insertCpActSubGroup(actSubGroup, applyLimitdtList, useLimitdtList)) {
                 return 1;
             }
         }
-        if (actsubGroupManager.updateCpActsubGroup(actsubGroup, applyLimitdtList, useLimitdtList)) {
+        if (actsubGroupManager.updateCpActsubGroup(actSubGroup, applyLimitdtList, useLimitdtList)) {
             return 1;
         }
         return 0;
@@ -87,7 +88,7 @@ public class CpActsubGroupServiceImpl implements CpActsubGroupService {
     public int deleteActsubGroup(long id) {
         try {
             if (id != 0) {
-                return actsubGroupDao.delete(id);
+                return actSubGroupDao.delete(id);
             }
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -102,12 +103,12 @@ public class CpActsubGroupServiceImpl implements CpActsubGroupService {
     }
 
     @Override
-    public int updateActsubGroup(CpActsubGroup search) {
-        return actsubGroupDao.update(search);
+    public int updateActSubGroup(CpActsubGroup search) {
+        return actSubGroupDao.update(search);
     }
 
     @Override
-    public CpActsubGroup getActsubGroup(Long id) {
-        return actsubGroupDao.get(id);
+    public CpActsubGroup getActSubGroup(Long id) {
+        return actSubGroupDao.get(id);
     }
 }

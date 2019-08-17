@@ -1,9 +1,9 @@
 package com.peiyu.mem.service;
 
-import com.migr.common.util.StringUtils;
 import com.peiyu.mem.domian.entity.CpMakingTask;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/6.
  * 制作优惠券任务
  */

@@ -1,13 +1,11 @@
 package com.peiyu.mem.manager.impl;
 
-import com.peiyu.mem.dao.CpActsubGroupDao;
+import com.peiyu.mem.dao.CpActSubGroupDao;
 import com.peiyu.mem.dao.CpapplylimitdtDao;
 import com.peiyu.mem.dao.CpuselimitdtDao;
-import com.peiyu.mem.domian.entity.CpActivity;
 import com.peiyu.mem.domian.entity.CpActsubGroup;
 import com.peiyu.mem.domian.entity.CpApplyLimitdt;
 import com.peiyu.mem.domian.entity.CpUseLimitdt;
-import com.peiyu.mem.manager.CpActivityManager;
 import com.peiyu.mem.manager.CpActsubGroupManager;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
@@ -21,6 +19,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.util.List;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/6.
  */
 @Service
@@ -29,20 +28,20 @@ public class CpActsubGroupManagerImpl implements CpActsubGroupManager {
     @Autowired
     private PlatformTransactionManager transactionManager;
     @Autowired
-    private CpActsubGroupDao actsubGroupDao;
+    private CpActSubGroupDao actSubGroupDao;
     @Autowired
     private CpuselimitdtDao uselimitdtDao;
     @Autowired
     private CpapplylimitdtDao applylimitdtDao;
 
     @Override
-    public boolean insertCpActsubGroup(final CpActsubGroup actsubGroup, final List<CpApplyLimitdt> applyLimits, final List<CpUseLimitdt> useLimits) {
+    public boolean insertCpActSubGroup(final CpActsubGroup actSubGroup, final List<CpApplyLimitdt> applyLimits, final List<CpUseLimitdt> useLimits) {
         TransactionTemplate template = new TransactionTemplate(transactionManager);
         return template.execute(new TransactionCallback<Boolean>() {
             @Override
             public Boolean doInTransaction(TransactionStatus transactionStatus) {
                 try {
-                    actsubGroupDao.insert(actsubGroup);
+                    actSubGroupDao.insert(actSubGroup);
                     if (CollectionUtils.isNotEmpty(applyLimits)) {
                         applylimitdtDao.insertBatchApplylimits(applyLimits);
                     }

@@ -23,7 +23,7 @@
     <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.BizCode">
         SELECT * FROM bizcode WHERE id=#{id}
     </select>
-    <select id="getBizcodeByBno" resultType="com.peiyu.mem.domian.entity.BizCode">
+    <select id="getBizCodeByBno" resultType="com.peiyu.mem.domian.entity.BizCode">
         select * from bizcode
         where vendorId=#{vendorId} and bno=#{bizNo}
     </select>

@@ -10,12 +10,13 @@ import redis.clients.jedis.ScanResult;
 import java.util.*;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/11/30.
  */
-public class JedisTemplate {
-    private static final Log log = LogFactory.getLog(JedisTemplate.class);
+public class RedisTemplate {
+    private static final Log log = LogFactory.getLog(RedisTemplate.class);
     private JedisPool jedisPool;
-    public JedisTemplate(JedisPool jedisPool) {
+    public RedisTemplate(JedisPool jedisPool) {
         this.jedisPool = jedisPool;
     }
     /***********************************String开始**************************************/

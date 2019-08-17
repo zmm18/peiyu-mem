@@ -12,12 +12,12 @@ import java.util.List;
 public interface CpActsubGroupManager {
     /**
      * 插入一条优惠券组
-     * @param actsubGroup
+     * @param actSubGroup
      * @param applyLimits
      * @param useLimits
      * @return
      */
-    boolean insertCpActsubGroup(CpActsubGroup actsubGroup, List<CpApplyLimitdt> applyLimits, List<CpUseLimitdt> useLimits);
+    boolean insertCpActSubGroup(CpActsubGroup actSubGroup, List<CpApplyLimitdt> applyLimits, List<CpUseLimitdt> useLimits);
 
     /**
      * 更新优惠券组

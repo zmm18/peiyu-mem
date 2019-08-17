@@ -1,14 +1,13 @@
 package com.peiyu.mem.manager.tests;
 
-import com.migr.common.util.DateUtil;
 import com.peiyu.mem.domian.entity.BizCode;
 import com.peiyu.mem.manager.BizCodeManager;
+import com.peiyu.mem.utils.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.ReflectionUtils;
 import org.unitils.reflectionassert.ReflectionAssert;
 
 /**

@@ -19,7 +19,7 @@ public interface MakingTaskManager {
      * @param taskCode
      * @return
      */
-    boolean isRepeatByMaikingCoupon(Long vendorId,String taskCode);
+    boolean isRepeatByMainKingCoupon(Long vendorId,String taskCode);
 
     /**
      * 把制券任务加入缓存中（防止重复提交）
@@ -32,20 +32,20 @@ public interface MakingTaskManager {
      * @param vendorId
      * @param taskCode
      */
-    void insertCacheByMakingConpon(Long vendorId,String taskCode);
+    void insertCacheByMainKingCoupon(Long vendorId,String taskCode);
 
     /**
      * 完成保存制券任务后删除缓存
      * @param makingTask
      */
-    void deteleCacheByTaskCode(CpMakingTask makingTask);
+    void deleteCacheByTaskCode(CpMakingTask makingTask);
 
     /**
      * 完成制券任务后删除缓存
      * @param vendorId
      * @param taskCode
      */
-    void deleteCacheByMakingConpon(Long vendorId,String taskCode);
+    void deleteCacheByMainKingCoupon(Long vendorId,String taskCode);
     /**
      * 获取制券任务
      * @param

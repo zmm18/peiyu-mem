@@ -1,5 +1,4 @@
-import com.peiyu.mem.redis.JedisTemplate;
-import org.junit.Assert;
+import com.peiyu.mem.redis.RedisTemplate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +14,12 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations = {"classpath*:/spring-redis-config.xml"})
 public class JedisTemplateUnitTests {
     @Autowired
-    private JedisTemplate jedisTemplate;
+    private RedisTemplate redisTemplate;
 
     @Test
     public void testSet() {
-        jedisTemplate.set("myredis", "helloworld");
-        String result = jedisTemplate.get("myredis");
+        redisTemplate.set("myredis", "helloworld");
+        String result = redisTemplate.get("myredis");
         assertEquals("helloworld", result);
     }
 }

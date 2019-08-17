@@ -26,7 +26,7 @@
         <constructor-arg index="1" value="${redis.hostName}" type="java.lang.String"/>
         <constructor-arg index="2" value="${redis.port}" type="int"/>
     </bean>
-    <bean id="jedisTemplate" class="com.peiyu.mem.redis.JedisTemplate">
+    <bean id="jedisTemplate" class="com.peiyu.mem.redis.RedisTemplate">
         <constructor-arg index="0" ref="jedisPool" />
     </bean>
 </beans>

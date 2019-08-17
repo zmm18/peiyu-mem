@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.zip.DeflaterOutputStream;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/11/29.
  */
 public class Coupon implements Serializable{

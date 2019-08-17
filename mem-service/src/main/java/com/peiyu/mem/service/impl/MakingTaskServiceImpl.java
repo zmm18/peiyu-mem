@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/6.
  */
 @Service
@@ -62,7 +63,7 @@ public class MakingTaskServiceImpl implements MakingTaskService {
                 log.error("没有保存制券任务");
                 return 2;
             }
-            if (makingTaskManager.isRepeatByMaikingCoupon(vendorId, taskCode)) {
+            if (makingTaskManager.isRepeatByMainKingCoupon(vendorId, taskCode)) {
                 log.error("制券正在进行，不要重复提交");
                 return 3;
             }
@@ -75,7 +76,7 @@ public class MakingTaskServiceImpl implements MakingTaskService {
             long start2 = System.currentTimeMillis();
             log.info("生产优惠券消费时间：" + (start2 - start1) + "毫秒");
             if (CollectionUtils.isNotEmpty(tempCoupons)) {
-                makingTaskManager.insertCacheByMakingConpon(vendorId, taskCode);
+                makingTaskManager.insertCacheByMainKingCoupon(vendorId, taskCode);
                 taskExecutor.execute(new Runnable() {
                     @Override
                     public void run() {
