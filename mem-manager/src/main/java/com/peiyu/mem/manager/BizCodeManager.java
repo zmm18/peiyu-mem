@@ -3,6 +3,7 @@ package com.peiyu.mem.manager;
 import com.peiyu.mem.domian.entity.BizCode;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/5.
  */
 public interface BizCodeManager {

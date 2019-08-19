@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/11/29.
  * 优惠券应用范围
  */

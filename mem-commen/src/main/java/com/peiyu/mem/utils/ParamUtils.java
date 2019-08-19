@@ -6,8 +6,10 @@ import javassist.bytecode.LocalVariableAttribute;
 import javassist.bytecode.MethodInfo;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/22.
  */
 public class ParamUtils {
@@ -49,7 +51,8 @@ public class ParamUtils {
         String[] paramNames = new String[cm.getParameterTypes().length];
         int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;
         for (int i = 0; i < paramNames.length; i++){
-            paramNames[i] = attr.variableName(i + pos); //paramNames即参数名
+            //paramNames即参数名
+            paramNames[i] = attr.variableName(i + pos);
         }
 
         return paramNames;

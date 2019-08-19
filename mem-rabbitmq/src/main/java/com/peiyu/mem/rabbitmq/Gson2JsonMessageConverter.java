@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/9.
  */
 public class Gson2JsonMessageConverter extends AbstractJsonMessageConverter {

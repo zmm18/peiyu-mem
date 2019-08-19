@@ -1,6 +1,6 @@
 package com.peiyu.mem.manager.impl;
 
-import com.migr.common.util.JsonUtil;
+import com.google.gson.Gson;
 import com.peiyu.mem.dao.CouponDao;
 import com.peiyu.mem.domian.entity.Coupon;
 import com.peiyu.mem.manager.CouponManager;
@@ -18,6 +18,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.util.List;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/7.
  */
 @Service
@@ -29,6 +30,8 @@ public class CouponManagerImpl implements CouponManager {
     private CouponDao couponDao;
     @Autowired
     private MqSenderHandler mqSenderHandler;
+
+    private final Gson gson = new Gson();
 
     @Override
     public boolean insertCoupons(final List<Coupon> coupons) {
@@ -47,7 +50,7 @@ public class CouponManagerImpl implements CouponManager {
                             try {
                                 couponDao.insertBatchCoupons(item);
                             } catch (Exception e) {
-                                String data = JsonUtil.g.toJson(item);
+                                String data = gson.toJson(item);
                                 mqSenderHandler.sendMessage("spring.makeCoupons.queueKey", data);
                                 continue;
                             }
@@ -79,7 +82,7 @@ public class CouponManagerImpl implements CouponManager {
                     return false;
                 } catch (Exception e) {
                     transactionStatus.setRollbackOnly();
-                    String data=JsonUtil.g.toJson(coupons);
+                    String data= gson.toJson(coupons);
                     mqSenderHandler.sendMessage("spring.updateCouponState.queueKey",data);
                     return false;
                 }

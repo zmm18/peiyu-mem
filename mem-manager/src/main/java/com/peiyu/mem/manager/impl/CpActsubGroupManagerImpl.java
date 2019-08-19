@@ -3,11 +3,9 @@ package com.peiyu.mem.manager.impl;
 import com.peiyu.mem.dao.CpActsubGroupDao;
 import com.peiyu.mem.dao.CpapplylimitdtDao;
 import com.peiyu.mem.dao.CpuselimitdtDao;
-import com.peiyu.mem.domian.entity.CpActivity;
 import com.peiyu.mem.domian.entity.CpActsubGroup;
 import com.peiyu.mem.domian.entity.CpApplyLimitdt;
 import com.peiyu.mem.domian.entity.CpUseLimitdt;
-import com.peiyu.mem.manager.CpActivityManager;
 import com.peiyu.mem.manager.CpActsubGroupManager;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
@@ -21,6 +19,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.util.List;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/6.
  */
 @Service
