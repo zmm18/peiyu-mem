@@ -1,6 +1,5 @@
 package com.peiyu.mem.service.impl;
 
-import com.migr.common.util.StringUtils;
 import com.peiyu.mem.commen.SysConstants;
 import com.peiyu.mem.commen.VerificationDate;
 import com.peiyu.mem.dao.*;
@@ -8,18 +7,17 @@ import com.peiyu.mem.domian.entity.*;
 import com.peiyu.mem.manager.CouponManager;
 import com.peiyu.mem.service.CouponService;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.logging.Log;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/7.
  */
 @Service

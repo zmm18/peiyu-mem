@@ -3,6 +3,7 @@ package com.peiyu.mem.service;
 import com.peiyu.mem.domian.entity.CpActsubGroup;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/3.
  */
 public interface CpActsubGroupService {

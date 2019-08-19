@@ -4,6 +4,7 @@ import javassist.NotFoundException;
 import org.aspectj.lang.JoinPoint;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/21.
  */
 public interface AbnormalLogService {

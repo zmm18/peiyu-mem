@@ -1,16 +1,17 @@
 package com.peiyu.mem.manager.impl;
 
-import com.migr.common.util.JsonUtil;
-import com.migr.common.util.StringUtils;
+import com.google.gson.Gson;
 import com.peiyu.mem.dao.CpMakingTaskDao;
 import com.peiyu.mem.domian.entity.CpMakingTask;
 import com.peiyu.mem.manager.MakingTaskManager;
 import com.peiyu.mem.redis.JedisTemplate;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/6.
  */
 @Service
@@ -20,6 +21,8 @@ public class MakingTaskManagerImpl implements MakingTaskManager {
     private JedisTemplate jedisTemplate;
     @Autowired
     private CpMakingTaskDao makingTaskDao;
+
+    private static Gson gson = new Gson();
 
     @Override
     public boolean isRepeat(CpMakingTask makingTask) {
@@ -48,7 +51,7 @@ public class MakingTaskManagerImpl implements MakingTaskManager {
     @Override
     public void insertCacheByTaskCode(CpMakingTask makingTask) {
         String taskCode = String.format("%s_%s", makingTask.getVendorId(), makingTask.getTaskCode());
-        String taskToJson = JsonUtil.objectToJson(makingTask);
+        String taskToJson = gson.toJson(makingTask);
         jedisTemplate.set(taskCode, taskToJson,24*60*60);
     }
 
@@ -75,7 +78,7 @@ public class MakingTaskManagerImpl implements MakingTaskManager {
         String taskCodeCache = String.format("%s_%s", vendorId, taskCode);
         String taskJson = jedisTemplate.get(taskCodeCache);
         if (StringUtils.isNotBlank(taskJson)) {
-            return JsonUtil.g.fromJson(taskJson, CpMakingTask.class);
+            return gson.fromJson(taskJson, CpMakingTask.class);
         }
         return makingTaskDao.getCpMakingTaskByTaskCode(vendorId,taskCode);
     }

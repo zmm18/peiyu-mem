@@ -1,7 +1,5 @@
 package com.peiyu.mem.service.impl;
 
-import com.migr.common.util.StringUtils;
-import com.migr.common.util.bean.BeanUtils;
 import com.peiyu.mem.commen.SysConstants;
 import com.peiyu.mem.dao.CpActivityDao;
 import com.peiyu.mem.domian.entity.CpActivity;
@@ -10,7 +8,9 @@ import com.peiyu.mem.domian.entity.CpUseLimitdt;
 import com.peiyu.mem.manager.CpActivityManager;
 import com.peiyu.mem.service.CpActivityService;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/2.
  */
 @Service

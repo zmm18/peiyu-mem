@@ -4,6 +4,7 @@ import javassist.NotFoundException;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/20.
  */
 public interface ActionLogService {

@@ -3,6 +3,7 @@ package com.peiyu.mem.service;
 import com.peiyu.mem.domian.entity.Member;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/16.
  */
 public interface MemberService {

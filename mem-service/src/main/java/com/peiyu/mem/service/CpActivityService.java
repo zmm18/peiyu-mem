@@ -3,6 +3,7 @@ package com.peiyu.mem.service;
 import com.peiyu.mem.domian.entity.CpActivity;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/2.
  */
 public interface CpActivityService {

@@ -1,6 +1,6 @@
 package com.peiyu.mem.commen;
 
-import com.migr.common.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/14.
  */
 public class VerificationDate {
