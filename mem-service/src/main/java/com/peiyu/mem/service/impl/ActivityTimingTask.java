@@ -1,6 +1,6 @@
 package com.peiyu.mem.service.impl;
 
-import com.migr.common.util.JsonUtil;
+import com.google.gson.Gson;
 import com.peiyu.mem.commen.SysConstants;
 import com.peiyu.mem.dao.CpActivityDao;
 import com.peiyu.mem.dao.CpActsubGroupDao;
@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2017/1/10.
  * 优惠券定时任务
  */
@@ -34,6 +35,8 @@ public class ActivityTimingTask {
     private CpuselimitdtDao cpuselimitdtDao;
     @Autowired
     private JedisTemplate jedisTemplate;
+
+    private final Gson gson = new Gson();
 
     /**
      * 获取数据代理
@@ -68,7 +71,7 @@ public class ActivityTimingTask {
                 return;
             }
             String key = getKey(search);
-            jedisTemplate.set(key, JsonUtil.g.toJson(search));
+            jedisTemplate.set(key, gson.toJson(search));
         }
     }
 

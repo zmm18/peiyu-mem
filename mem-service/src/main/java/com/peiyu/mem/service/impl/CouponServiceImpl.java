@@ -1,6 +1,5 @@
 package com.peiyu.mem.service.impl;
 
-import com.migr.common.util.StringUtils;
 import com.peiyu.mem.commen.SysConstants;
 import com.peiyu.mem.commen.VerificationDate;
 import com.peiyu.mem.dao.*;
@@ -10,7 +9,7 @@ import com.peiyu.mem.manager.impl.CouponActivityCacheManager;
 import com.peiyu.mem.manager.impl.CouponCacheManager;
 import com.peiyu.mem.service.CouponService;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.logging.Log;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -21,6 +20,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/7.
  */
 @Service

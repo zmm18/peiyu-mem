@@ -1,8 +1,7 @@
 package com.peiyu.mem.service.impl;
 
-import com.migr.common.util.JsonUtil;
+import com.google.gson.Gson;
 import com.peiyu.mem.domian.entity.AbnormalLog;
-import com.peiyu.mem.domian.entity.ActionLog;
 import com.peiyu.mem.rabbitmq.produces.MqSenderHandler;
 import com.peiyu.mem.service.AbnormalLogService;
 import com.peiyu.mem.utils.ParamUtils;
@@ -14,12 +13,15 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/21.
  */
 @Service
 public class AbnormalLogServiceImpl implements AbnormalLogService {
     @Autowired
     private MqSenderHandler senderHandler;
+
+    private final Gson gson = new Gson();
 
     @Override
     public void saveAbnormalLog(JoinPoint joinPoint, Exception e) throws ClassNotFoundException, NotFoundException {
@@ -59,7 +61,7 @@ public class AbnormalLogServiceImpl implements AbnormalLogService {
         abnormalLog.setMethodParam(methodParam.toString());
         abnormalLog.setParamValue(pavamValues.toString());
         abnormalLog.setAbnormalInfo(e.getStackTrace().toString());
-        String data = JsonUtil.g.toJson(abnormalLog);
+        String data = gson.toJson(abnormalLog);
         senderHandler.sendMessage("spring.abnormalLog.queueKey", data);
     }
 }

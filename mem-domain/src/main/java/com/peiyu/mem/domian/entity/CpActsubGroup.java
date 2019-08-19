@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/11/23.
  * 优惠券组
  */

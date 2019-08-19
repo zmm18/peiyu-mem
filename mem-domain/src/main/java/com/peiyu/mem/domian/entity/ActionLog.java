@@ -3,6 +3,7 @@ package com.peiyu.mem.domian.entity;
 import java.util.Date;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/19.
  */
 public class ActionLog {

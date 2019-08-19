@@ -1,10 +1,9 @@
 package com.peiyu.mem.manager.impl;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.migr.common.util.JsonUtil;
-import com.migr.common.util.StringUtils;
 import com.peiyu.mem.dao.CpActivityDao;
 import com.peiyu.mem.dao.CpActsubGroupDao;
 import com.peiyu.mem.dao.CpapplylimitdtDao;
@@ -14,6 +13,7 @@ import com.peiyu.mem.domian.entity.CpActsubGroup;
 import com.peiyu.mem.domian.entity.CpApplyLimitdt;
 import com.peiyu.mem.domian.entity.CpUseLimitdt;
 import com.peiyu.mem.redis.JedisTemplate;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2017/1/5.
  */
 @Service
@@ -40,6 +41,8 @@ public class CouponActivityCacheManager {
     private JedisTemplate jedisTemplate;
     @Autowired
     private ThreadPoolTaskExecutor taskExecutor;
+
+    private final Gson gson = new Gson();
 
     abstract class ListGetterHandler<T> {
         /**
@@ -62,7 +65,8 @@ public class CouponActivityCacheManager {
             String jsonList = jedisTemplate.get(key);
             if (StringUtils.isBlank(jsonList)) {
                 final String lockKey = "lock:" + key;
-                if (jedisTemplate.hsetNX(lockKey, lockKey, "60") == 1) {//防止并发时候数据库被击穿（表示设置成功）
+                //防止并发时候数据库被击穿（表示设置成功）
+                if (jedisTemplate.hsetNX(lockKey, lockKey, "60") == 1) {
                     list = getListFromDB(search);
                     final List<T> finalList = list;
                     //异步刷新缓存
@@ -70,7 +74,7 @@ public class CouponActivityCacheManager {
                         @Override
                         public void run() {
                             try {
-                                String json = JsonUtil.g.toJson(finalList);
+                                String json = gson.toJson(finalList);
                                 jedisTemplate.set(key, json, 24 * 60 * 60);
                             } catch (Exception e) {
                                 log.error("刷新缓存失败", e);
@@ -84,7 +88,7 @@ public class CouponActivityCacheManager {
             if (StringUtils.isNotBlank(jsonList)) {
                 JsonArray array = new JsonParser().parse(jsonList).getAsJsonArray();
                 for (final JsonElement elem : array) {
-                    list.add(JsonUtil.g.fromJson(elem, type));
+                    list.add(gson.fromJson(elem, type));
                 }
                 return list;
             }

@@ -4,6 +4,7 @@ import com.peiyu.mem.domian.entity.Member;
 import org.apache.ibatis.annotations.Param;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/13.
  */
 public interface MemberDao extends BaseDao<Member> {

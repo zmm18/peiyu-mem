@@ -1,6 +1,7 @@
 package com.peiyu.mem.domian.entity;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/13.
  * 商品送券的实体
  */

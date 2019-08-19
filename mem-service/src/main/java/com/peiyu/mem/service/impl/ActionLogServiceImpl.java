@@ -1,34 +1,27 @@
 package com.peiyu.mem.service.impl;
 
-import com.migr.common.util.JsonUtil;
-import com.migr.common.util.StringUtils;
+import com.google.gson.Gson;
 import com.peiyu.mem.domian.entity.ActionLog;
-import com.peiyu.mem.domian.entity.Member;
 import com.peiyu.mem.rabbitmq.produces.MqSenderHandler;
 import com.peiyu.mem.service.ActionLogService;
 import com.peiyu.mem.utils.ParamUtils;
 import javassist.*;
-import javassist.bytecode.CodeAttribute;
-import javassist.bytecode.LocalVariableAttribute;
-import javassist.bytecode.MethodInfo;
-import org.apache.commons.collections.CollectionUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Proxy;
 import java.util.Date;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/20.
  */
 @Service
 public class ActionLogServiceImpl implements ActionLogService {
     @Autowired
     private MqSenderHandler senderHandler;
+
+    private final Gson gson = new Gson();
 
     @Override
     public Object insertActionLog(ProceedingJoinPoint joinPoint) throws ClassNotFoundException, NotFoundException {
@@ -104,7 +97,7 @@ public class ActionLogServiceImpl implements ActionLogService {
         }
         long end = System.currentTimeMillis();
         actionLog.setOperationTime(end - start);
-        String data = JsonUtil.g.toJson(actionLog);
+        String data = gson.toJson(actionLog);
         senderHandler.sendMessage("spring.actionLog.queueKey", data);
         return obj;
     }
