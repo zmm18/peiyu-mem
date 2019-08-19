@@ -1,7 +1,6 @@
 package com.peiyu.com.rabbitmq.tests;
 
-import com.migr.common.util.DateUtil;
-import com.migr.common.util.JsonUtil;
+import com.google.gson.Gson;
 import com.peiyu.mem.domian.entity.Coupon;
 import com.peiyu.mem.rabbitmq.produces.MqSenderHandler;
 import org.junit.Test;
@@ -24,6 +23,7 @@ public class MqSenderHandlerUnitTests {
     private MqSenderHandler mqSenderHandler;
     @Test
     public void testSendMessage(){
+        Gson gson = new Gson();
         for (int i=0;i<5;i++){
             Coupon coupon=new Coupon();
             coupon.setVendorId(1461l);
@@ -45,7 +45,7 @@ public class MqSenderHandlerUnitTests {
             coupon.setDf(0);
             List<Coupon> coupons=new ArrayList<>();
             coupons.add(coupon);
-            String data= JsonUtil.g.toJson(coupons);
+            String data= gson.toJson(coupons);
             mqSenderHandler.sendMessage("spring.makeCoupons.queueKey",data);
         }
     }

@@ -19,14 +19,14 @@ public interface CpActsubGroupService {
      * @param id
      * @return
      */
-    int deleteActsubGroup(long id);
+    int deleteActSubGroup(long id);
 
     /**
      * 批量删除优惠券组记录
      * @param ids
      * @return
      */
-    int deleteBatchActsubGroup(String ids);
+    int deleteBatchActSubGroup(String ids);
 
     /**
      * 根据条件更新优惠券组信息

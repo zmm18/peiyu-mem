@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
+ * @Author 900045
  * Created by Administrator on 2016/12/12.
  */
 public class MakeCouponsHandler2 implements ChannelAwareMessageListener {

@@ -26,11 +26,11 @@ public class CpActsubGroupServiceImpl implements CpActsubGroupService {
     @Autowired
     private CpActSubGroupDao actSubGroupDao;
     @Autowired
-    private CpActsubGroupManager actsubGroupManager;
+    private CpActsubGroupManager actSubGroupManager;
     @Override
     public int insertActSubGroup(CpActsubGroup actSubGroup) {
-        List<CpApplyLimitdt> applyLimitdtList = new ArrayList<>();
-        List<CpUseLimitdt> useLimitdtList = new ArrayList<>();
+        List<CpApplyLimitdt> applyLimitList = new ArrayList<>();
+        List<CpUseLimitdt> userLimitList = new ArrayList<>();
         if (!actSubGroup.getApplyScopeType().equals(SysConstants.COUPONAPPLIEDRANGE.UNLIMITED)) {
             if (StringUtils.isEmpty(actSubGroup.getDetailCode())) {
                 log.error("没有选择应用范围");
@@ -53,7 +53,7 @@ public class CpActsubGroupServiceImpl implements CpActsubGroupService {
             applyLimit.setOwnRecordCode(actSubGroup.getSubgroupCode());
             applyLimit.setDetailCode(splitCodes[i]);
             applyLimit.setDetailName(splitNames[i]);
-            applyLimitdtList.add(applyLimit);
+            applyLimitList.add(applyLimit);
         }
         String[] codes = actSubGroup.getOrganOrStoreCode().split(",");
         String[] names = actSubGroup.getOrganOrStoreName().split(",");
@@ -71,21 +71,21 @@ public class CpActsubGroupServiceImpl implements CpActsubGroupService {
                 useLimit.setStoreCode(codes[i]);
                 useLimit.setStoreName(names[i]);
             }
-            useLimitdtList.add(useLimit);
+            userLimitList.add(useLimit);
         }
         if (actSubGroup.getId() == null) {
-            if (actsubGroupManager.insertCpActSubGroup(actSubGroup, applyLimitdtList, useLimitdtList)) {
+            if (actSubGroupManager.insertCpActSubGroup(actSubGroup, applyLimitList, userLimitList)) {
                 return 1;
             }
         }
-        if (actsubGroupManager.updateCpActsubGroup(actSubGroup, applyLimitdtList, useLimitdtList)) {
+        if (actSubGroupManager.updateCpActsubGroup(actSubGroup, applyLimitList, userLimitList)) {
             return 1;
         }
         return 0;
     }
 
     @Override
-    public int deleteActsubGroup(long id) {
+    public int deleteActSubGroup(long id) {
         try {
             if (id != 0) {
                 return actSubGroupDao.delete(id);
@@ -98,7 +98,7 @@ public class CpActsubGroupServiceImpl implements CpActsubGroupService {
     }
 
     @Override
-    public int deleteBatchActsubGroup(String ids) {
+    public int deleteBatchActSubGroup(String ids) {
         return 0;
     }
 

@@ -18,7 +18,9 @@ public interface MakingTaskService {
     /**
      * 制券
      * 0：制券失败，1：制券成功，2：没有保存制券任务，3：重复提交制券
-     * @param
+     * @param vendorId
+     * @param taskTask
+     * @return
      */
     int makingCoupon(Long vendorId, String taskTask);
 
